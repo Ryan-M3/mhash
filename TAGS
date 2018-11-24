@@ -1,9 +1,10 @@
 
-./app/Main.hs,77
-module Main Main0,1
-helpTxt helpTxt8,9
-main main17,18
-main main18,19
+./app/Main.hs,104
+module Main Main11,12
+helpTxt helpTxt20,21
+helpTxt helpTxt21,22
+main main69,70
+main main70,71
 
 ./test/Spec.hs,30
 main main0,1
@@ -12,45 +13,48 @@ main main1,2
 ./Setup.hs,15
 main main1,2
 
-./src/Updates.hs,567
+./src/Updates.hs,563
 module UpdatesUpdates0,1
 addHashes addHashes21,22
 addHashes addHashes22,23
-hashDoc hashDoc30,31
-hashDoc hashDoc31,32
-mkDefTbl mkDefTbl39,40
-mkDefTbl mkDefTbl40,41
-mkMetaTbl mkMetaTbl42,43
-mkMetaTbl mkMetaTbl43,44
-mkNewTbl mkNewTbl47,48
-mkNewTbl mkNewTbl48,49
-addToMeta addToMeta54,55
-addToMeta addToMeta55,56
-setDefTbl setDefTbl60,61
-setDefTbl setDefTbl61,62
-renameTbl renameTbl66,67
-renameTbl renameTbl67,68
-renameTblMeta renameTblMeta70,71
-renameTblMeta renameTblMeta71,72
-listPaths listPaths74,75
-listPaths listPaths75,76
+mkDefTbl mkDefTbl30,31
+mkDefTbl mkDefTbl31,32
+mkMetaTbl mkMetaTbl33,34
+mkMetaTbl mkMetaTbl34,35
+mkNewTbl mkNewTbl38,39
+mkNewTbl mkNewTbl39,40
+addToMeta addToMeta45,46
+addToMeta addToMeta46,47
+setDefTbl setDefTbl51,52
+setDefTbl setDefTbl52,53
+renameTbl renameTbl57,58
+renameTbl renameTbl58,59
+renameTblMeta renameTblMeta61,62
+renameTblMeta renameTblMeta62,63
+listPaths listPaths65,66
+listPaths listPaths66,67
+delTbl delTbl72,73
+delTbl delTbl73,74
 
-./src/Hash.hs,356
-module Hash Hash0,1
-ngram ngram13,14
-ngram ngram14,15
-hash hash21,22
-hash hash22,23
-minhash minhash27,28
-minhash minhash28,29
-mhash mhash42,43
-mhash mhash45,46
-jaccard jaccard50,51
-jaccard jaccard51,52
-toGroupsOfN toGroupsOfN56,57
-toGroupsOfN toGroupsOfN57,58
-getNumBuckets getNumBuckets65,66
-getNumBuckets getNumBuckets66,67
+./src/Hash.hs,426
+module HashHash2,3
+ngram ngram24,25
+ngram ngram25,26
+tokenize tokenize29,30
+tokenize tokenize30,31
+hash_ hash_36,37
+hash_ hash_37,38
+hash hash43,44
+minhash minhash48,49
+minhash minhash49,50
+mhash mhash61,62
+mhash mhash64,65
+jaccard jaccard68,69
+jaccard jaccard69,70
+toGroupsOfN toGroupsOfN74,75
+toGroupsOfN toGroupsOfN75,76
+getNumBuckets getNumBuckets83,84
+getNumBuckets getNumBuckets84,85
 
 ./src/Reads.hs,375
 module ReadsReads0,1
@@ -74,7 +78,7 @@ getCnx getCnx13,14
 execSql execSql18,19
 execSql execSql19,20
 
-./src/Services.hs,666
+./src/Services.hs,718
 module ServicesServices0,1
 pprintSimilar pprintSimilar26,27
 pprintSimilar pprintSimilar27,28
@@ -86,18 +90,24 @@ getSample getSample65,66
 getSample getSample66,67
 addDoc addDoc70,71
 addDoc addDoc71,72
-setupDB setupDB76,77
-setupDB setupDB77,78
-mkTbl mkTbl79,80
-mkTbl mkTbl80,81
-renameTblService renameTblService84,85
-renameTblService renameTblService85,86
-addDocsFromPath addDocsFromPath87,88
-addDocsFromPath addDocsFromPath88,89
+setupDB setupDB78,79
+setupDB setupDB79,80
+mkTbl mkTbl81,82
+mkTbl mkTbl82,83
+renameTblService renameTblService86,87
+renameTblService renameTblService87,88
+addDocsFromPath addDocsFromPath89,90
+addDocsFromPath addDocsFromPath90,91
+listTbls listTbls95,96
 listTbls listTbls96,97
-listTbls listTbls97,98
+listDocs listDocs98,99
 listDocs listDocs99,100
-listDocs listDocs100,101
+hashDoc_ hashDoc_103,104
+hashDoc_ hashDoc_104,105
+
+./src/StopWords.hs,57
+module StopWords StopWords0,1
+stopWords stopWords2,3
 
 ./src/Lib.hs,19
 module LibLib0,1

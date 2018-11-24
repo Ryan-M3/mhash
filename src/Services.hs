@@ -107,5 +107,5 @@ hashDoc_ fpath = do
     n      <- ngramSize
     hcount <- hashCount
     case length txt of
-      0   -> error "Can't hash empty document."
-      _   -> return $ take hcount $ mhash (ngram n) txt
+      0 -> error "Can't hash empty document."
+      _ -> return $ take hcount $ mhash (ngram n) txt

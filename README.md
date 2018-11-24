@@ -197,3 +197,9 @@ files  above  in order  to  accomplish  certain use-cases.  Every
 function, with  the exception of  hashDoc_ is called  directly by
 main (main also  calls two functions from  Updates directly since
 the use-case can be translated directly into SQL).
+
+### StopWords.hs
+
+A list of common and not very interesting words to be filterd out
+from the algorithm. Obtained from:
+    https://algs4.cs.princeton.edu/35applications/stopwords.txt
