@@ -1,7 +1,7 @@
 {-|
 Module     : MoonLogic
 Description: Implements "Dismal Arithmetic"
-License    : CC0
+License    : MIT
 Maintainer : Ryan McNamara <gn341ram@gmail.com>
 Portability: Linux
 
@@ -29,3 +29,15 @@ instance Semigroup MoonInt where
 instance Monoid MoonInt where
     mempty  = MoonInt $ repeat maxBound
     mappend = minwise
+
+digits :: MoonInt -> Int
+digits (MoonInt xs) = length xs
+
+fromMoonInt :: MoonInt -> [Int]
+fromMoonInt (MoonInt xs) = xs
+
+jaccard :: MoonInt -> MoonInt -> Double
+jaccard (MoonInt xs) (MoonInt ys) = numer / denom
+    where similar = zipWith (==) xs ys
+          numer   = fromIntegral . sum $ fromEnum <$> similar
+          denom   = fromIntegral $ length xs

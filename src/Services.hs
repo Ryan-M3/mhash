@@ -11,10 +11,12 @@ module Services
     , mostSimilar
     ) where
 
-import Hash
+import Groupings
+import ParallelHash
 import Reads
 import Updates
 import BasicDB
+import MoonLogic
 
 import System.IO
 import Data.List
@@ -38,24 +40,25 @@ pprintSimilar fpath n = do
 
 findSimilar :: FilePath -> IO ([(String, Double)])
 findSimilar fpath = do
-    hashes     <- hashDoc_ fpath
+    hash       <- pHashDoc fpath
     tbl        <- defTblName
     numEntries <- getNumEntries tbl
     -- This big series of let statements are just for building up to a Sql
     -- statement that divides the search up into buckets and makes comparisons
     -- on that basis. 
-    let colEqs    = printf "hash%s=?" <$> show <$> [1..length hashes] :: [String]
-    let nbuckets  = getNumBuckets (length hashes) numEntries 0.75
-    let colGroups = toGroupsOfN (max 1 $ length hashes `div` nbuckets) colEqs
+    let numHashes   = digits hash 
+    let colEqs    = printf "hash%s=?" <$> show <$> [1..numHashes] :: [String]
+    let nbuckets  = getNumBuckets numHashes numEntries 0.75
+    let colGroups = toGroupsOfN (max 1 $ numHashes `div` nbuckets) colEqs
     let intoBands = (intercalate " AND ") <$> colGroups
     let whereCond = intercalate ") OR (" intoBands
     let query = printf "SELECT filePath FROM %s WHERE (%s);" tbl whereCond
     cnx     <- getCnx
-    results <- quickQuery' cnx query $ toSql <$> hashes
+    results <- quickQuery' cnx query $ toSql <$> fromMoonInt hash
     disconnect cnx
     let similarPaths = fromSql <$> (concat results)
     simHashes <- mapM getHashes similarPaths
-    let similarities = jaccard hashes <$> simHashes
+    let similarities = jaccard hash <$> simHashes
     return $ sortOn (negate . snd) $ zip similarPaths similarities
 
 mostSimilar :: FilePath -> Int -> IO [String]
@@ -74,7 +77,7 @@ addDoc fpath = do
     n   <- ngramSize
     if (length . words) txt < n
     then putStrLn $ "skipping " ++ fpath
-    else hashDoc_ fpath >>= addHashes fpath
+    else pHashDoc fpath >>= addHashes fpath
 
 setupDB :: IO ()
 setupDB = mkDefTbl >> mkMetaTbl
@@ -100,12 +103,3 @@ listDocs :: String -> IO ()
 listDocs "" = defTblName >>= listDocs
 listDocs tblName = listPaths tblName >>= print'
     where print' = \txt -> print $ intercalate "\n" txt
-
-hashDoc_ :: FilePath -> IO [Int]
-hashDoc_ fpath = do
-    txt    <- hGetContents =<< openFile fpath ReadMode
-    n      <- ngramSize
-    hcount <- hashCount
-    case length txt of
-      0 -> error "Can't hash empty document."
-      _ -> return $ take hcount $ mhash (ngram n) txt

@@ -28,6 +28,8 @@ dependencies:
 - regex-base     >= 0.93
 - regex-posix    >= 0.95
 - regex-tdfa     >= 1.2
+- parallel       >= 3.2
+- criterion      >= 0.5
 
 library:
   source-dirs: src
@@ -51,5 +53,7 @@ tests:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
+    - -g1 # disable parallel garbage collection
+    - -qg0
     dependencies:
     - mhash

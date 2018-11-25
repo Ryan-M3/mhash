@@ -13,19 +13,20 @@ module Updates
 
 import BasicDB
 import Reads
-import Hash
+import Groupings
+import MoonLogic
 
 import Text.Printf
 import Data.List
 import System.IO
 
-addHashes :: FilePath -> [Int] -> IO ()
-addHashes _ [] = error "Received empty list of hashes."
+addHashes :: FilePath -> MoonInt -> IO ()
+addHashes _ (MoonInt []) = error "Received empty list of hashes."
 addHashes fpath hashes = do
     tbl <- defTblName
-    let qmarks = intercalate ", " $ replicate (length hashes) "?"
+    let qmarks = intercalate ", " $ replicate (digits hashes) "?"
     let query  = printf "INSERT OR REPLACE INTO %s VALUES (?, %s);" tbl qmarks
-    let args   = [toSql fpath] ++ (toSql <$> hashes)
+    let args   = [toSql fpath] ++ (toSql <$> (fromMoonInt hashes))
     execSql query args
 
 mkDefTbl :: IO ()

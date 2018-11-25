@@ -7,11 +7,42 @@ main main69,70
 main main70,71
 
 ./test/Spec.hs,30
-main main0,1
-main main1,2
+main main2,3
+main main3,4
+
+./test/PHashBench.hs,172
+module PHashBench PHashBench0,1
+docs docs12,13
+docs docs13,14
+pHashDoc pHashDoc16,17
+pHashDoc pHashDoc17,18
+pHashDocs pHashDocs25,26
+pHashDocs pHashDocs26,27
 
 ./Setup.hs,15
 main main1,2
+
+./src/OldHash.hs,222
+module OldHash OldHash0,1
+tokenize' tokenize'8,9
+tokenize' tokenize'9,10
+hash_ hash_15,16
+hash_ hash_16,17
+hash hash22,23
+unsalted unsalted27,28
+unsalted unsalted28,29
+mhash mhash42,43
+mhash mhash45,46
+
+./src/ParallelHash.hs,193
+module ParallelHash ParallelHash0,1
+hash_ hash_24,25
+hash_ hash_25,26
+hash hash32,33
+hashShingle hashShingle34,35
+hashShingle hashShingle35,36
+mhash mhash38,39
+mhash mhash39,40
 
 ./src/Updates.hs,563
 module UpdatesUpdates0,1
@@ -36,25 +67,18 @@ listPaths listPaths66,67
 delTbl delTbl72,73
 delTbl delTbl73,74
 
-./src/Hash.hs,426
+./src/Hash.hs,287
 module HashHash2,3
-ngram ngram24,25
-ngram ngram25,26
-tokenize tokenize29,30
-tokenize tokenize30,31
-hash_ hash_36,37
-hash_ hash_37,38
-hash hash43,44
-minhash minhash48,49
-minhash minhash49,50
-mhash mhash61,62
-mhash mhash64,65
-jaccard jaccard68,69
-jaccard jaccard69,70
-toGroupsOfN toGroupsOfN74,75
-toGroupsOfN toGroupsOfN75,76
-getNumBuckets getNumBuckets83,84
-getNumBuckets getNumBuckets84,85
+ngram ngram26,27
+ngram ngram27,28
+tokenize tokenize31,32
+tokenize tokenize32,33
+jaccard jaccard35,36
+jaccard jaccard36,37
+toGroupsOfN toGroupsOfN41,42
+toGroupsOfN toGroupsOfN42,43
+getNumBuckets getNumBuckets50,51
+getNumBuckets getNumBuckets51,52
 
 ./src/Reads.hs,375
 module ReadsReads0,1
@@ -70,6 +94,14 @@ getNumEntries getNumEntries55,56
 getNumEntries getNumEntries56,57
 getTblNames getTblNames63,64
 getTblNames getTblNames64,65
+
+./src/MoonLogic.hs,177
+module MoonLogic MoonLogic17,18
+newtype MoonInt MoonInt19,20
+newtype MoonInt = MoonInt MoonInt19,20
+minwise minwise22,23
+minwise minwise23,24
+instance instance25,26
 
 ./src/BasicDB.hs,115
 module BasicDBBasicDB0,1

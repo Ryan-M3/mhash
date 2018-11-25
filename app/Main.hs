@@ -1,7 +1,7 @@
 {-|
 Module     : Main
 Description: Dispatch terminal arguments to functions.
-License    : CC0
+License    : MIT
 Maintainer : Ryan McNamara <gn341ram@gmail.com>
 Portability: Linux
 

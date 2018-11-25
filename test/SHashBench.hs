@@ -1,34 +1,28 @@
-{-# LANGUAGE QuasiQuotes #-}
+{-|
+Module     : SHashBench
+Description: Benchmarking for the serial version of minhash.
+License    : CC0
+Maintainer : Ryan McNamara <gn341ram@gmail.com>
+Portability: Linux
 
-module Hash
-    ( ngram
-    , mhash
-    , jaccard
-    , toGroupsOfN
-    , getNumBuckets
-    , hash
-    ) where
+Contains now depricated functions for performing hashes in serial.
+|-}
+
+module SHashBench where
 
 import StopWords
+import Groupings
+import PHashBench (docs)
+import Reads
 
 import Data.List
 import Data.Bits
 import Data.Char
 import Text.Regex.Posix
+import System.IO
 
--- |Break a set of ordered items down into a set of all
--- consecutive elements of length n.
---
--- Example usage:
---   Input : print ngrams 3 [0..]
---   Output: "[[0, 1, 2], [1, 2, 3], [2, 3, 4], ..."
-ngram :: Int -> [a] -> [[a]]
-ngram n items
-  | length items < n = []
-  | otherwise        = [take n items] ++ ngram n (tail items)
-
-tokenize :: String -> [String]
-tokenize = filter (`notElem` stopWords) . words'
+tokenize' :: String -> [String]
+tokenize' = filter (`notElem` stopWords) . words'
     where words' = getAllTextMatches . (=~ "\\w+") . (map toLower)
 
 -- |Hash text  into an 8-bit integer.  This is not a  very random
@@ -49,7 +43,7 @@ hash = hash_ 64
 unsalted :: [String] -> String -> Int
 unsalted shingles salt =
     let hashes = (hash salt) <$> shingles
-     in if hashes == [] then minBound else minimum hashes
+     in if hashes == [] then maxBound else minimum hashes
 
 -- |The minhashing algorithm creates a locality-sensitive hash of
 -- a document. A locality-sensitive hash  is a hash such that two
@@ -64,26 +58,17 @@ unsalted shingles salt =
 mhash :: ([String] -> [[String]])   -- ngram function (bigrams, 3-grams...)
       -> String                     -- full document to be minhashed
       -> [Int]                      -- an infinite list of hashes
-mhash ngramFn txt =
-    let shingles = concat <$> (ngramFn . tokenize $ txt)
+mhash ngramFn txt = let shingles = concat <$> (ngramFn . tokenize' $ txt)
      in (unsalted shingles) . show <$> [1..]
+sHashDoc :: FilePath -> IO [Int]
+sHashDoc fpath = do
+    txt    <- hGetContents =<< openFile fpath ReadMode
+    n      <- ngramSize
+    hcount <- hashCount
+    case length txt of
+      0 -> error "Can't hash empty document."
+      _ -> return $ take hcount $ mhash (ngram n) txt
 
-jaccard :: Eq a => [a] -> [a] -> Double
-jaccard a b = numer / denom
-    where similar = (==) <$> a <*> b
-          numer = fromIntegral $ length $ filter (==True) similar
-          denom = fromIntegral $ length similar
-
-toGroupsOfN :: Int -> [a] -> [[a]]
-toGroupsOfN n xs 
-  | length xs <= n = [xs]
-  | otherwise      = [take n xs] ++ toGroupsOfN n (drop n xs)
-
--- |Estimate the number of buckets needed do nearest-neighbor search
--- given some prefernce for performance, where 0% means accuracy is
--- the only thing that's important and 100% performance means all
--- you really care about is how quickly the query can be done.
-getNumBuckets :: Int -> Int -> Float -> Int
-getNumBuckets numHashes numEntries performance =
-    let size = fromIntegral numEntries * fromIntegral numHashes * performance
-     in min numHashes $ max 1 $ (round . log)  size
+sHashDocs :: Int -> IO ()
+sHashDocs numDocs = do
+    mapM_ sHashDoc (docs numDocs)

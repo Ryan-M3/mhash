@@ -9,6 +9,7 @@ module Reads
 where
 
 import BasicDB
+import MoonLogic
 
 import Text.Printf
 
@@ -32,7 +33,7 @@ ngramSize = do
     disconnect cnx
     return $ (fromSql . head . concat) results
 
-getHashes :: String -> IO ([Int])
+getHashes :: String -> IO (MoonInt)
 getHashes fpath = do
     cnx <- getCnx
     tblName <- defTblName
@@ -40,7 +41,7 @@ getHashes fpath = do
     results <- quickQuery' cnx query [toSql fpath]
     disconnect cnx
     let hashes = tail $ fromSql <$> (concat results)
-    return hashes
+    return $ MoonInt hashes
 
 hashCount :: IO (Int)
 hashCount = do
