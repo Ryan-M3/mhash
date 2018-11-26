@@ -41,8 +41,8 @@ executables:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
-    - -g1 # disable parallel garbage collection
-    - -qg0
+    - -g1
+    - +RTS -qg -RTS # disable parallel garbage collection
     dependencies:
     - mhash
 
@@ -54,7 +54,7 @@ tests:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
-    - -g1 # disable parallel garbage collection
-    - -qg0
+    - -g1
+    - +RTS -qg -RTS # disable parallel garbage collection
     dependencies:
     - mhash
