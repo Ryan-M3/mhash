@@ -16,15 +16,15 @@ docs :: Int -> [String]
 docs n = (printf fpath) <$> ([0..n-1] :: [Int])
     where fpath = "/home/ryan/Downloads/reddit_comments/%d.txt"
 
-pHashDoc :: FilePath -> IO (MoonInt)
-pHashDoc fpath = do
+pHashDoc' :: FilePath -> IO (MoonInt)
+pHashDoc' fpath = do
     txt    <- hGetContents =<< openFile fpath ReadMode
     n      <- ngramSize
     hcount <- hashCount
     case length txt of
       0 -> error "Can't hash empty document."
-      _ -> return $ mhash hcount $ concat $ ngram n $ tokenize txt
+      _ -> return $ parMinHash hcount $ concat $ ngram n $ tokenize txt
 
-pHashDocs :: Int -> IO ()
-pHashDocs numDocs = do
+pHashDocs' :: Int -> IO ()
+pHashDocs' numDocs = do
     mapM_ pHashDoc (docs numDocs)
