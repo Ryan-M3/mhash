@@ -174,10 +174,41 @@ Database operations  which are  used throughout the  code; simple
 helper functions which provide just a little bit more abstraction
 over HDBC.
 
-### Hash.hs
+### Groupings.hs
 
-The algorithmy parts of the  program. All pure functions, some of
-which I might even want to use in other projects.
+Some helper functions that group lists of objects:
+
+    * ngram for breaking a list of tokens into groups of n words
+
+    * toGroupsOfN which is similar, but does allow overlapping
+
+    * tokenize which converts a string to a list of tokens, and
+
+    * getNumBuckets  which calculates  the number  of buckets  (size of
+      groups  of items  to find  matches for,  also called  "bands") to
+      search for in the database.
+
+### MoonLogic.hs
+
+Explicit data-modelling of  the list of minhashes  to represent a
+document. Wraps that list of minhashes into the type MoonInt (see
+numerphile.com/videos/lunar-arithmetic). In addition  to making a
+MoonInt more typesafe by distinguishing it from a list of Ints, a
+list of hashes also forms a monoid under the pairwise application
+of  min,  allowing it  to  use  several built-in  functions  like
+mconcat.  Also defines  the  function "jaccard"  for finding  the
+jaccard similarity of two MoonInts.
+
+### ParallelHash.hs
+
+A parallel version of the hashing functions used in this project.
+The serial  version is  no longer  present in  src and  was moved
+entirely to  the directory test  so that it could  be benchmarked
+against the parallel version. The parallel version actually takes
+the same  amount of time to  complete on my machine,  but I coded
+the  whole thing  on  a  slow laptop  while  visiting my  parents
+out-of-state,  so presumably  on more  sophisticated machines  it
+will outperform the serial verison rather than just match it.
 
 ### Reads.hs
 
