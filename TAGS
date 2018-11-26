@@ -7,101 +7,113 @@ main main69,70
 main main70,71
 
 ./test/Spec.hs,30
-main main2,3
-main main3,4
+main main4,5
+main main5,6
 
-./test/PHashBench.hs,172
+./test/PHashBench.hs,180
 module PHashBench PHashBench0,1
-docs docs12,13
-docs docs13,14
-pHashDoc pHashDoc16,17
-pHashDoc pHashDoc17,18
-pHashDocs pHashDocs25,26
-pHashDocs pHashDocs26,27
+docs docs14,15
+docs docs15,16
+pHashDoc' pHashDoc'18,19
+pHashDoc' pHashDoc'19,20
+pHashDocs' pHashDocs'27,28
+pHashDocs' pHashDocs'28,29
+
+./test/SHashBench.hs,337
+module SHashBench SHashBench10,11
+tokenize' tokenize'23,24
+tokenize' tokenize'24,25
+hash_ hash_30,31
+hash_ hash_31,32
+hash hash37,38
+unsalted unsalted42,43
+unsalted unsalted43,44
+mhash mhash57,58
+mhash mhash60,61
+sHashDoc sHashDoc62,63
+sHashDoc sHashDoc63,64
+sHashDocs sHashDocs71,72
+sHashDocs sHashDocs72,73
 
 ./Setup.hs,15
 main main1,2
 
-./src/OldHash.hs,222
-module OldHash OldHash0,1
-tokenize' tokenize'8,9
-tokenize' tokenize'9,10
-hash_ hash_15,16
-hash_ hash_16,17
-hash hash22,23
-unsalted unsalted27,28
-unsalted unsalted28,29
-mhash mhash42,43
-mhash mhash45,46
-
-./src/ParallelHash.hs,193
+./src/ParallelHash.hs,317
 module ParallelHash ParallelHash0,1
-hash_ hash_24,25
-hash_ hash_25,26
-hash hash32,33
-hashShingle hashShingle34,35
-hashShingle hashShingle35,36
-mhash mhash38,39
-mhash mhash39,40
+hash' hash'26,27
+hash' hash'27,28
+hash hash34,35
+hashShingle hashShingle36,37
+hashShingle hashShingle37,38
+parMinHash parMinHash40,41
+parMinHash parMinHash41,42
+pHashDoc pHashDoc44,45
+pHashDoc pHashDoc45,46
+pHashDoc' pHashDoc'53,54
+pHashDoc' pHashDoc'54,55
 
 ./src/Updates.hs,563
 module UpdatesUpdates0,1
-addHashes addHashes21,22
 addHashes addHashes22,23
-mkDefTbl mkDefTbl30,31
+addHashes addHashes23,24
 mkDefTbl mkDefTbl31,32
-mkMetaTbl mkMetaTbl33,34
+mkDefTbl mkDefTbl32,33
 mkMetaTbl mkMetaTbl34,35
-mkNewTbl mkNewTbl38,39
+mkMetaTbl mkMetaTbl35,36
 mkNewTbl mkNewTbl39,40
-addToMeta addToMeta45,46
+mkNewTbl mkNewTbl40,41
 addToMeta addToMeta46,47
-setDefTbl setDefTbl51,52
+addToMeta addToMeta47,48
 setDefTbl setDefTbl52,53
-renameTbl renameTbl57,58
+setDefTbl setDefTbl53,54
 renameTbl renameTbl58,59
-renameTblMeta renameTblMeta61,62
+renameTbl renameTbl59,60
 renameTblMeta renameTblMeta62,63
-listPaths listPaths65,66
+renameTblMeta renameTblMeta63,64
 listPaths listPaths66,67
-delTbl delTbl72,73
+listPaths listPaths67,68
 delTbl delTbl73,74
+delTbl delTbl74,75
 
-./src/Hash.hs,287
-module HashHash2,3
-ngram ngram26,27
-ngram ngram27,28
-tokenize tokenize31,32
-tokenize tokenize32,33
-jaccard jaccard35,36
-jaccard jaccard36,37
-toGroupsOfN toGroupsOfN41,42
-toGroupsOfN toGroupsOfN42,43
-getNumBuckets getNumBuckets50,51
-getNumBuckets getNumBuckets51,52
+./src/Groupings.hs,253
+module GroupingsGroupings10,11
+ngram ngram30,31
+ngram ngram31,32
+tokenize tokenize35,36
+tokenize tokenize36,37
+toGroupsOfN toGroupsOfN39,40
+toGroupsOfN toGroupsOfN40,41
+getNumBuckets getNumBuckets48,49
+getNumBuckets getNumBuckets49,50
 
 ./src/Reads.hs,375
 module ReadsReads0,1
-defTblName defTblName18,19
 defTblName defTblName19,20
-ngramSize ngramSize25,26
+defTblName defTblName20,21
 ngramSize ngramSize26,27
-getHashes getHashes34,35
+ngramSize ngramSize27,28
 getHashes getHashes35,36
-hashCount hashCount44,45
+getHashes getHashes36,37
 hashCount hashCount45,46
-getNumEntries getNumEntries55,56
+hashCount hashCount46,47
 getNumEntries getNumEntries56,57
-getTblNames getTblNames63,64
+getNumEntries getNumEntries57,58
 getTblNames getTblNames64,65
+getTblNames getTblNames65,66
 
-./src/MoonLogic.hs,177
+./src/MoonLogic.hs,327
 module MoonLogic MoonLogic17,18
 newtype MoonInt MoonInt19,20
 newtype MoonInt = MoonInt MoonInt19,20
 minwise minwise22,23
 minwise minwise23,24
 instance instance25,26
+digits digits32,33
+digits digits33,34
+fromMoonInt fromMoonInt35,36
+fromMoonInt fromMoonInt36,37
+jaccard jaccard38,39
+jaccard jaccard39,40
 
 ./src/BasicDB.hs,115
 module BasicDBBasicDB0,1
@@ -110,32 +122,32 @@ getCnx getCnx13,14
 execSql execSql18,19
 execSql execSql19,20
 
-./src/Services.hs,718
+./src/Services.hs,720
 module ServicesServices0,1
-pprintSimilar pprintSimilar26,27
-pprintSimilar pprintSimilar27,28
-findSimilar findSimilar38,39
-findSimilar findSimilar39,40
-mostSimilar mostSimilar60,61
-mostSimilar mostSimilar61,62
-getSample getSample65,66
-getSample getSample66,67
-addDoc addDoc70,71
-addDoc addDoc71,72
-setupDB setupDB78,79
-setupDB setupDB79,80
-mkTbl mkTbl81,82
-mkTbl mkTbl82,83
-renameTblService renameTblService86,87
-renameTblService renameTblService87,88
-addDocsFromPath addDocsFromPath89,90
-addDocsFromPath addDocsFromPath90,91
-listTbls listTbls95,96
-listTbls listTbls96,97
-listDocs listDocs98,99
-listDocs listDocs99,100
-hashDoc_ hashDoc_103,104
-hashDoc_ hashDoc_104,105
+pprintSimilar pprintSimilar28,29
+pprintSimilar pprintSimilar29,30
+findSimilar findSimilar40,41
+findSimilar findSimilar41,42
+mostSimilar mostSimilar63,64
+mostSimilar mostSimilar64,65
+getSample getSample68,69
+getSample getSample69,70
+addDoc addDoc73,74
+addDoc addDoc74,75
+addDoc' addDoc'81,82
+addDoc' addDoc'82,83
+setupDB setupDB88,89
+setupDB setupDB89,90
+mkTbl mkTbl91,92
+mkTbl mkTbl92,93
+renameTblService renameTblService96,97
+renameTblService renameTblService97,98
+addDocsFromPath addDocsFromPath99,100
+addDocsFromPath addDocsFromPath100,101
+listTbls listTbls105,106
+listTbls listTbls106,107
+listDocs listDocs108,109
+listDocs listDocs109,110
 
 ./src/StopWords.hs,57
 module StopWords StopWords0,1
