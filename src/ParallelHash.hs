@@ -38,8 +38,8 @@ hashShingle :: Int -> String -> MoonInt
 hashShingle nhashes txt = MoonInt m
     where m = zipWith hash (show <$> [1..nhashes]) (repeat txt) :: [Int]
 
-mhash :: Int -> [String] -> MoonInt
-mhash ngramSize shingles = mconcat moonInts
+parMinHash :: Int -> [String] -> MoonInt
+parMinHash ngramSize shingles = mconcat moonInts
     where moonInts = (parMap rseq) (hashShingle ngramSize) shingles
 
 pHashDoc :: FilePath -> IO (MoonInt)
@@ -49,4 +49,10 @@ pHashDoc fpath = do
     hcount <- hashCount
     case length txt of
       0 -> error "Can't hash empty document."
-      _ -> return $ mhash hcount $ concat $ ngram n $ tokenize txt
+      _ -> return $ parMinHash hcount $ concat $ ngram n $ tokenize txt
+
+pHashDoc' :: Int -> Int -> String -> IO (MoonInt)
+pHashDoc' n hcount txt = do
+    case length txt of
+      0 -> error "Can't hash empty document."
+      _ -> return $ parMinHash hcount $ concat $ ngram n $ tokenize txt

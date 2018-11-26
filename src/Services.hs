@@ -73,11 +73,18 @@ getSample filePath = do
 
 addDoc :: FilePath -> IO ()
 addDoc fpath = do
-    txt <- hGetContents =<< openFile fpath ReadMode;
+    txt <- hGetContents =<< openFile fpath ReadMode
     n   <- ngramSize
-    if (length . words) txt < n
+    if   (length . tokenize) txt < n
     then putStrLn $ "skipping " ++ fpath
     else pHashDoc fpath >>= addHashes fpath
+
+addDoc' :: Int -> Int -> FilePath -> IO ()
+addDoc' n hCount fpath = do
+    txt <- hGetContents =<< openFile fpath ReadMode
+    if   (length . tokenize) txt < n
+    then putStrLn $ "skipping:\n\t" ++ txt
+    else pHashDoc' n hCount txt >>= addHashes fpath
 
 setupDB :: IO ()
 setupDB = mkDefTbl >> mkMetaTbl
@@ -92,7 +99,7 @@ renameTblService old new = renameTbl old new >> renameTblMeta old new
 
 addDocsFromPath :: FilePath -> IO ()
 addDocsFromPath dirPath = do
-    files <- listDirectory dirPath
+    files  <- listDirectory dirPath
     let fullFilePaths = (dirPath++) <$> files
     mapM_ addDoc fullFilePaths
 

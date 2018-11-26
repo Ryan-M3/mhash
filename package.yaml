@@ -29,6 +29,7 @@ dependencies:
 - regex-posix    >= 0.95
 - regex-tdfa     >= 1.2
 - parallel       >= 3.2
+- async          >= 2.2
 - criterion      >= 0.5
 
 library:
